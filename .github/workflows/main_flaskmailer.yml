@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'FlaskMailer'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_855730D18A1D4120BDFB397E041386C8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6BD105C0C19845B3BF8D2A0D07BC45DD }}
