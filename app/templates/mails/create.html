@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block header %}
+<h1>{% block title %}Send Mail{% endblock %}</h1>
+{% endblock %}
+{% block content %}
+  <form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input name="email" type="text" id="email" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="subject">Subject</label>
+        <input name="subject" type="text" id="subject" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Content</label>
+        <textarea name="content" id="content" required></textarea>
+    </div>
+    <div class="form-group">
+        <button class="button">Send</button>
+    </div>
+  </form>
+{% endblock %}

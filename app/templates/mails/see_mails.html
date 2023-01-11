@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block header %} {% endblock %} {% block content %}
+<section class="mail-section">
+  <section class="content">
+    <h2 class="search-bar-title">Search</h2>
+    <div class="top-bar">
+      <form method="GET">
+        <input
+          name="search"
+          type="text"
+          placeholder="You want to search anything?"
+        />
+      </form>
+    </div>
+
+    {% if request.args.get("search"):%}
+    <h1 class="title">Emails sent - {{ result }} matches were found</h1>
+    {% else: %}
+    <h1 class="title">{% block title %}Emails sent{% endblock %}</h1>
+    {% endif %}
+
+
+    <ul>
+      {% for mail in mails %}
+      <div>
+        <li class="mail">
+          <p class="email">
+            You have sent an email to: <span>{{ mail['email'] }}</span>
+          </p>
+          <hr />
+          <p class="subject">
+            The subject was: <span>{{ mail['subject'] }}</span>
+          </p>
+          <p class="mail-content">{{ mail['content'] }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    
+  </section>
+  {% endblock %}
+</section>

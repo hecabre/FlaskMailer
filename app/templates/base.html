@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--CSS-->
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      type="text/css"
+      rel="stylesheet"
+      id="light"
+      title="Light"
+    />
+    <!--AWESOME FONTS-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abel&display=swap"
+      rel="stylesheet"
+    />
+    <title>{% block title %}{% endblock %} - Mailer</title>
+  </head>
+  <body>
+    <nav>
+      <ul class="navbar">
+        <li class="navbar-item">
+          <a href="{{ url_for('email.index') }}">
+            <i class="fa-solid fa-house"></i>
+            Index</a
+          >
+        </li>
+        {% if g.user%}
+        <li class="navbar-item">
+          <a href="{{ url_for('email.see_mails') }}"
+            ><i class="fa-solid fa-envelope"></i> My Mails</a
+          >
+        </li>
+        <li class="navbar-item">
+          <a href="{{ url_for('email.create') }}">
+            <i class="fa-solid fa-paper-plane"></i>New Mail</a
+          >
+        </li>
+        <li class="navbar-item">
+          <a href="#">
+            <i class="fa-solid fa-user"></i>{{ g.user['username']}}
+          </a>
+        </li>
+        <li class="navbar-item">
+          <a href="{{ url_for('mailer.logout')}}">
+            <i class="fa-solid fa-right-to-bracket"></i>Log Out</a
+          >
+        </li>
+        {% else %}
+        <li></li>
+        <li class="navbar-item">
+          <a href="{{ url_for('mailer.register')}}"
+            ><i class="fa-solid fa-user-plus"></i>Register</a
+          >
+        </li>
+        <li class="navbar-item">
+          <a href="{{ url_for('mailer.login')}}">
+            <i class="fa-solid fa-user"></i>Login</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <header>{% block header %} {% endblock %}</header>
+
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %} {% block content %} {% endblock %}
+  </body>
+</html>
